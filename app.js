@@ -11,6 +11,12 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+const db = firebase.firestore();
+const books = db.collection("books").doc("6Ua9PwuVtdztfGthIhkQ");
+
+const form = document.getElementById("form");
+const content = document.querySelector(".content");
+
 let myLibrary = [];
 
 function Book(title, author, pages, isRead) {
@@ -26,3 +32,16 @@ function Book(title, author, pages, isRead) {
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
 }
+
+const toggleForm = (e) => {
+  if (e.target.id === "header-btn") {
+    if (form.className === "form-display") {
+      form.className = "form-hidden";
+    } else {
+      form.className = "form-display";
+    }
+  }
+};
+
+const headerBtn = document.getElementById("header-btn");
+headerBtn.addEventListener("click", toggleForm);
