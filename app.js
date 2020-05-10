@@ -23,14 +23,7 @@ function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.isRead = isRead || false;
-  this.info = function () {
-    return `${this.title} by ${this.author}, ${this.pages}, ${this.isRead ? "read" : "not read yet"}`;
-  };
-}
-
-function addBookToLibrary(title, author, pages, isRead) {
-  const newBook = new Book(title, author, pages, isRead);
+  this.isRead = isRead;
 }
 
 const toggleForm = (e) => {
@@ -45,3 +38,30 @@ const toggleForm = (e) => {
 
 const headerBtn = document.getElementById("header-btn");
 headerBtn.addEventListener("click", toggleForm);
+
+function addBookToLibrary({ title, author, pages, isRead }) {
+  const newBook = new Book(title, author, pages, isRead);
+  return newBook;
+}
+
+// handle form submission and send to firebase
+document.getElementById("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const checked = document.getElementById("read-btn").checked;
+  const book = addBookToLibrary({
+    title: e.target.title.value,
+    author: e.target.author.value,
+    pages: e.target.pages.value,
+    isRead: checked,
+  });
+
+  try {
+    const addToFB = await db.collection("books").add({ ...book });
+    if (addToFB) {
+      console.log(`Book added!`);
+    }
+    form.reset();
+  } catch (error) {
+    if (error) throw error;
+  }
+});
