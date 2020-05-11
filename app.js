@@ -65,7 +65,7 @@ async function updateBooktoFB(id, status) {
     const updated = await db.doc(id).update({
       isRead: status,
     });
-    if (updated) console.log(`Entry ${id} updated`);
+    console.log(`Entry ${id} updated`);
   } catch (err) {
     if (err) throw err;
   }
@@ -148,19 +148,18 @@ async function toggleRead(e) {
   if (e.target.id === "read-list-btn") {
     const id = e.target.parentNode.getAttribute("data-id");
     const listRead = e.target.parentNode.children[1].children[3];
+    let status;
     if (e.target.getAttribute("data-read") === "false") {
-      await db.doc(id).update({
-        isRead: true,
-      });
+      status = true;
       e.target.setAttribute("data-read", "true");
       listRead.textContent = `Read: Yes`;
     } else {
-      await db.doc(id).update({
-        isRead: false,
-      });
+      status = false;
       e.target.setAttribute("data-read", "false");
       listRead.textContent = `Read: No`;
     }
+
+    await updateBooktoFB(id, status);
   }
 }
 
