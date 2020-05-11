@@ -106,8 +106,8 @@ async function addBook(e) {
           <div class="cards" data-id="${doc.id}">
             <div class="image-div"><img class="image" src="${data.bookCover}"/></div>
             <ul class="card-list">
-              <li>Book Title: ${data.title}</li>
-              <li>Book Author: ${data.author}</li>
+              <li>Title: ${data.title}</li>
+              <li>Author: ${data.author}</li>
               <li>Number of Pages: ${data.pages}</li>
               <li id="list-read">Read: ${data.isRead ? "Yes" : "No"}
             </ul>
