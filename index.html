@@ -14,16 +14,20 @@
       </div>
       <form class="form-hidden" id="form">
         <div>
-          <label for="author">Book Author</label>
-          <input type="text" name="author" />
-        </div>
-        <div>
           <label for="title">Book Title</label>
           <input type="text" name="title" />
         </div>
         <div>
+          <label for="author">Book Author</label>
+          <input type="text" name="author" />
+        </div>
+        <div>
           <label for="pages">Number Of Pages</label>
           <input type="number" name="pages" />
+        </div>
+        <div>
+          <label for="bookCover">Link to Book Cover</label>
+          <input type="url" name="bookCover" />
         </div>
         <div>
           <label for="read">Book Read?</label>
@@ -31,18 +35,7 @@
         </div>
         <button type="submit">Add To Library</button>
       </form>
-      <div class="content">
-        <div class="cards">
-          <div class="image">Photo</div>
-          <ul class="card-list">
-            <li>Hi: Solid</li>
-            <li">Hi: Solid</li>
-          </ul>
-        </div>
-        <div class="cards">Example</div>
-        <div class="cards">Example</div>
-        <div class="cards">Example</div>
-      </div>
+      <div class="content" id="content"></div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
