@@ -65,7 +65,7 @@ body {
   border: 1px solid black;
   margin: 0.8rem;
   width: 35vw;
-  height: 20vh;
+  height: 100%;
 }
 
 .card-list {
@@ -99,6 +99,13 @@ body {
   background-color: #f44336;
   color: white;
   border: 1px solid #f44336;
+}
+
+#error-msg {
+  color: red;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 @keyframes fadein {

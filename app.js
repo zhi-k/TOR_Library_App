@@ -175,6 +175,16 @@ function toggleForm(e) {
   }
 }
 
+function noToggleForm(e) {
+  if (e.target.id === "header-btn") {
+    const container = document.querySelector(".container");
+    container.innerHTML += `<strong id="error-msg">Maximum 10 entries reached! Please delete before adding new entry!</strong>`;
+    setTimeout(function () {
+      location.reload();
+    }, 3000);
+  }
+}
+
 async function main() {
   // display all results from firebase
   const snapshot = await getBooksfromFB();
@@ -204,7 +214,11 @@ async function main() {
 
   // form toggling
   const formBtn = document.getElementById("header-btn");
-  formBtn.addEventListener("click", toggleForm);
+  if (content.childNodes.length >= 10) {
+    formBtn.addEventListener("click", noToggleForm);
+  } else {
+    formBtn.addEventListener("click", toggleForm);
+  }
 
   //handle form
   const form = document.getElementById("form");
