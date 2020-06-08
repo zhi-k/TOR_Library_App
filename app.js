@@ -80,15 +80,39 @@ async function getBooksfromFB() {
   }
 }
 
+function assertInput(title, author, pages) {
+  if (!title) {
+    return alert("Title is required");
+  }
+
+  if (!author) {
+    return alert("Author is required");
+  }
+
+  if (typeof title !== "string" || typeof author !== "string") {
+    return alert("Title and author must be of type string");
+  }
+
+  if (isNaN(+pages)) {
+    return alert("Pages must be of type number");
+  }
+
+  const coercedPages = +pages;
+
+  return { title, author, pages: coercedPages };
+}
+
 // add book from list
 async function addBook(e) {
   e.preventDefault();
+
+  const { title, author, pages } = assertInput(e.target.title.value, e.target.author.value, e.target.pages.value);
   const checked = e.target.read.checked;
 
   const book = newBook({
-    title: e.target.title.value,
-    author: e.target.author.value,
-    pages: e.target.pages.value,
+    title,
+    author,
+    pages,
     isRead: checked,
     bookCover: e.target.bookCover.value || "notFound.svg",
   });
